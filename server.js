@@ -10,11 +10,8 @@ app.use(express.urlencoded({ extended: false }));
 
 const port = process.env.PORT || 3000;
 
-
 connectDB(process.env.MONGO_URI);
 app.listen(port, console.log(`server is listening on port ${port}...`));
-
-
 
 app.get("/", async (req, res) => {
   const shortUrls = await ShortUrl.find();
@@ -22,7 +19,7 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/shortUrls", async (req, res) => {
-  await ShortUrl.create({ full: req.body.fullUrl });
+  await ShortUrl.create({ full: req.body.fullUrl, short: req.body.shortUrl });
   res.redirect("/");
 });
 
@@ -35,7 +32,3 @@ app.get("/:shortUrl", async (req, res) => {
 
   res.redirect(shortUrl.full);
 });
-
-
-
-
