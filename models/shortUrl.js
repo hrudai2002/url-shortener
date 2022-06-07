@@ -8,7 +8,7 @@ const shortUrlSchema = new mongoose.Schema({
   },
   short: {
     type: String,
-    default: shortId.generate,
+    required: true,
   },
   clicks: {
     type: Number,
